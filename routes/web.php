@@ -14,3 +14,5 @@ Route::get('/custom-activity/config.json', [\App\Http\Controllers\CustomActivity
 Route::post('/custom-activity/execute', [\App\Http\Controllers\CustomActivityController::class, 'execute']);
 Route::post('/custom-activity/save', [\App\Http\Controllers\CustomActivityController::class, 'save']);
 Route::post('/custom-activity/publish', [\App\Http\Controllers\CustomActivityController::class, 'publish']);
+Route::post('/custom-activity/validate', [\App\Http\Controllers\CustomActivityController::class, 'validate']);
+Route::post('/custom-activity/stop', [\App\Http\Controllers\CustomActivityController::class, 'stop']);

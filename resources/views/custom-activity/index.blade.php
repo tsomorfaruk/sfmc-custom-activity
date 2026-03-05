@@ -5,7 +5,7 @@
 </head>
 <body>
 <h3>Custom Activity Config</h3>
-<input type="text" id="apiUrl" placeholder="Enter API URL">
+<input type="text" id="apiUrl" placeholder="Write a Message">
 <button id="save">Save</button>
 
 <script>

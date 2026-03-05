@@ -29,16 +29,27 @@ class CustomActivityController extends Controller
                 ]
             ],
             "configurationArguments" => [
-                "applicationExtensionKey" => "6c998e75-c288-4d7a-bd2e-877429140c61",
                 "save" => [
                     "url" => url('/custom-activity/save'),
-                    "verb" => "POST"
                 ],
                 "publish" => [
                     "url" => url('/custom-activity/publish'),
-                    "verb" => "POST"
+                ],
+                "validate" => [
+                    "url" => url('/custom-activity/validate'),
+                ],
+                "stop" => [
+                    "url" => url('/custom-activity/stop'),
+                ]
+            ],
+            "userInterfaces"=> [
+                "configModal" => [
+                    "height"=> 450,
+                    "width"=> 800,
+                    "fullscreen"=> false
                 ]
             ]
+
         ]);
     }
 
@@ -71,6 +82,24 @@ class CustomActivityController extends Controller
 
         return response()->json([
             'status' => 'published'
+        ]);
+    }
+
+    public function validate(Request $request)
+    {
+        \Log::info('Validate called', $request->all());
+
+        return response()->json([
+            'status' => 'validate'
+        ]);
+    }
+
+    public function stop(Request $request)
+    {
+        \Log::info('Stop called', $request->all());
+
+        return response()->json([
+            'status' => 'stopped'
         ]);
     }
 }
