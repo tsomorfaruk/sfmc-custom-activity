@@ -10,6 +10,7 @@ class CustomActivityController extends Controller
     {
         return response()->json([
             "workflowApiVersion" => "1.1",
+            "name" => "Custom Activity",
             "metaData" => [
                 "icon" => url('/images/icon.png'),
                 "category" => "message"
@@ -25,7 +26,6 @@ class CustomActivityController extends Controller
                 "execute" => [
                     "inArguments" => [],
                     "url" => url('/custom-activity/execute'),
-                    "verb" => "POST"
                 ]
             ],
             "configurationArguments" => [
@@ -48,8 +48,7 @@ class CustomActivityController extends Controller
                     "width"=> 800,
                     "fullscreen"=> false
                 ]
-            ]
-
+            ],
         ]);
     }
 

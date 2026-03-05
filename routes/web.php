@@ -7,6 +7,10 @@ Route::get('/', function () {
 });
 
 Route::get('/custom-activity', function () {
+    return redirect()->route('custom-activity.index');
+});
+
+Route::get('/custom-activity/index.html', function () {
     return view('custom-activity.index');
 })->name('custom-activity.index');
 
