@@ -6,99 +6,68 @@ use Illuminate\Http\Request;
 
 class CustomActivityController extends Controller
 {
-    public function config()
+
+    public function index()
     {
-        return response()->json([
-            "workflowApiVersion" => "1.1",
-            "name" => "Custom Activity",
-            "metaData" => [
-                "icon" => url('/images/icon.png'),
-                "category" => "message"
-            ],
-            "type" => "REST",
-            "lang" => [
-                "en-US" => [
-                    "name" => "SFMC Custom Activity",
-                    "description" => "Send data to External system"
-                ]
-            ],
-            "arguments" => [
-                "execute" => [
-                    "inArguments" => [],
-                    "url" => url('/custom-activity/execute'),
-                ]
-            ],
-            "configurationArguments" => [
-                "save" => [
-                    "url" => url('/custom-activity/save'),
-                ],
-                "publish" => [
-                    "url" => url('/custom-activity/publish'),
-                ],
-                "validate" => [
-                    "url" => url('/custom-activity/validate'),
-                ],
-                "stop" => [
-                    "url" => url('/custom-activity/stop'),
-                ]
-            ],
-            "userInterfaces"=> [
-                "configModal" => [
-                    "height"=> 450,
-                    "width"=> 800,
-                    "fullscreen"=> false
-                ]
-            ],
-        ]);
+        return view('custom-activity.index');
     }
 
-    public function execute(Request $request)
+    public function upload_image(Request $request)
     {
-        $data = $request->all();
 
-        // Example: get contact data
-        $contact = $data['inArguments'][0] ?? [];
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+        ]);
 
-        // Your Laravel logic here
+        $file = $request->file('image');
+
+        $name = time().'_'.$file->getClientOriginalName();
+
+        $path = $file->storeAs('activity_images',$name,'public');
+
+        $url = asset('storage/'.$path);
 
         return response()->json([
-            "status" => "success"
+            'url' => $url
         ]);
+
     }
+
 
     public function save(Request $request)
     {
-        \Log::info('Save called', $request->all());
-
         return response()->json([
-            'status' => 'saved'
+            "status" => "saved"
         ]);
     }
 
     public function publish(Request $request)
     {
-        \Log::info('Publish called', $request->all());
-
         return response()->json([
-            'status' => 'published'
+            "status" => "published"
         ]);
     }
 
-    public function validate(Request $request)
+    public function validateConfig(Request $request)
     {
-        \Log::info('Validate called', $request->all());
-
         return response()->json([
-            'status' => 'validate'
+            "status" => "validated"
         ]);
     }
 
     public function stop(Request $request)
     {
-        \Log::info('Stop called', $request->all());
+        return response()->json([
+            "status" => "stopped"
+        ]);
+    }
+
+    public function execute(Request $request)
+    {
+        \Log::info('Journey Data', $request->all());
 
         return response()->json([
-            'status' => 'stopped'
+            "status" => "success"
         ]);
     }
 }

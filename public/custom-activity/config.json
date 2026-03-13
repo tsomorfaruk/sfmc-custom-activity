@@ -1,0 +1,76 @@
+{
+    "workflowApiVersion": "1.1",
+    "type": "REST",
+    "metaData": {
+        "icon": "/images/icon.png",
+        "category": "message"
+    },
+    "lang": {
+        "en-US": {
+            "name": "Laravel Custom Activity",
+            "description": "Send data to Laravel API"
+        }
+    },
+    "arguments": {
+        "execute": {
+            "inArguments": [
+                {
+                    "emailAddress": "{{InteractionDefaults.Email}}"
+                }
+            ],
+            "outArguments": [
+                {
+                    "status": ""
+                }
+            ],
+
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/execute"
+        }
+    },
+    "configurationArguments": {
+        "save": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/save"
+        },
+        "publish": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/publish"
+        },
+        "validate": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/validate"
+        },
+        "stop": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/stop"
+        }
+
+    },
+    "userInterfaces": {
+        "configModal": {
+            "height": 450,
+            "width": 800,
+            "fullscreen": false
+        }
+    },
+    "schema": {
+        "arguments": {
+            "execute": {
+                "inArguments": [
+                    {
+                        "emailAddress": {
+                            "dataType": "Email",
+                            "isNullable": false,
+                            "direction": "in"
+                        }
+                    }
+                ],
+                "outArguments": [
+                    {
+                        "status": {
+                            "dataType": "Test",
+                            "direction": "out",
+                            "access": "visible"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

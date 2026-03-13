@@ -1,55 +1,165 @@
-<!DOCTYPE html>
+<?php
+?>
+ {{--   <!DOCTYPE html>
 <html>
 <head>
-    {{--<script src="https://unpkg.com/postmonger"></script>--}}
-    <script src="https://unpkg.com/postmonger@0.0.16/postmonger.js"></script>
+    <script src="https://unpkg.com/postmonger"></script>
 </head>
+
 <body>
-<h3>Custom Activity Config</h3>
-<input type="text" id="apiUrl" placeholder="Write a Message">
+
+<h2>Custom Activity</h2>
+
+<input type="text" id="message" placeholder="Enter Message">
+
+<br><br>
+
 <button id="save">Save</button>
 
 <script>
+
     var connection = new Postmonger.Session();
 
-    connection.on("initActivity", function(data) {
-        console.log(data);
-    });
+    connection.trigger('ready');
+    connection.trigger('requestTokens');
+    connection.trigger('requestEndpoints');
 
     document.getElementById("save").onclick = function() {
-        connection.trigger("updateActivity", {});
+
+        var payload = {
+            message: document.getElementById("message").value
+        };
+
+        connection.trigger("updateActivity", payload);
     };
 
-    /*var connection = new Postmonger.Session();
+</script>
 
-    // 1. Listen for the initActivity event sent by SFMC
-    connection.on("initActivity", function(data) {
-        console.log("Activity Initialized:", data);
-        if (data) {
-            // Populate your UI fields with existing data if needed
-            document.getElementById("apiUrl").value = data.arguments.execute.inArguments[0].message || '';
+</body>
+</html>
+--}}
+
+    <!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://unpkg.com/postmonger@0.0.16/postmonger.js"></script>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f5f5f5;
+            padding:20px;
         }
-    });*/
 
-    // 2. Tell Journey Builder the activity is ready to be displayed
-    // Without this, the loader will spin indefinitely or fail
-    /*connection.trigger('ready');
+        .box{
+            background:white;
+            padding:20px;
+            border-radius:8px;
+            width:400px;
+            margin:auto;
+        }
 
-    document.getElementById("save").onclick = function() {
-        const message = document.getElementById("apiUrl").value;
+        input,textarea{
+            width:100%;
+            padding:10px;
+            margin-top:8px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:5px;
+        }
 
-        // 3. Update the activity's configuration in the journey
-        connection.trigger("updateActivity", {
-            arguments: {
-                execute: {
-                    inArguments: [{ "message": message }]
+        button{
+            background:#25D366;
+            color:white;
+            border:none;
+            padding:10px;
+            width:100%;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+    <h3>Send Message</h3>
+
+    <input type="text" id="message" placeholder="Message">
+
+    <input type="file" id="image" accept=".jpg,.jpeg,.png">
+
+    <textarea id="description" placeholder="Description"></textarea>
+
+    <button id="sendBtn">Send</button>
+
+</div>
+
+<script>
+
+    var connection = new Postmonger.Session();
+
+    connection.trigger("ready");
+
+    let imageUrl = null;
+
+    document.getElementById("image").addEventListener("change", async function(){
+
+        let file = this.files[0];
+
+        let formData = new FormData();
+
+        formData.append("image", file);
+
+        let response = await fetch("/custom-activity/upload-image",{
+            method:"POST",
+            headers:{
+                "X-CSRF-TOKEN":"{{ csrf_token() }}"
+            },
+            body:formData
+        });
+
+        let data = await response.json();
+
+        imageUrl = data.url;
+
+    });
+
+    document.getElementById("sendBtn").onclick=function(){
+
+        let message = document.getElementById("message").value;
+
+        let description = document.getElementById("description").value;
+
+        connection.trigger("updateActivity",{
+
+            arguments:{
+                execute:{
+                    inArguments:[
+                        {
+                            message:message,
+                            description:description,
+                            image:imageUrl
+                        }
+                    ]
                 }
             },
-            metaData: {
-                isConfigured: true // Marks the activity as "Done" in the UI
+
+            metaData:{
+                isConfigured:true
             }
+
         });
-    };*/
+
+    };
+
 </script>
+
 </body>
+
 </html>
