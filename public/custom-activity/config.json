@@ -64,7 +64,7 @@
                 "outArguments": [
                     {
                         "status": {
-                            "dataType": "Test",
+                            "dataType": "Text",
                             "direction": "out",
                             "access": "visible"
                         }
