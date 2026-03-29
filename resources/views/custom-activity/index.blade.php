@@ -1,44 +1,5 @@
 <?php
 ?>
- {{--   <!DOCTYPE html>
-<html>
-<head>
-    <script src="https://unpkg.com/postmonger"></script>
-</head>
-
-<body>
-
-<h2>Custom Activity</h2>
-
-<input type="text" id="message" placeholder="Enter Message">
-
-<br><br>
-
-<button id="save">Save</button>
-
-<script>
-
-    var connection = new Postmonger.Session();
-
-    connection.trigger('ready');
-    connection.trigger('requestTokens');
-    connection.trigger('requestEndpoints');
-
-    document.getElementById("save").onclick = function() {
-
-        var payload = {
-            message: document.getElementById("message").value
-        };
-
-        connection.trigger("updateActivity", payload);
-    };
-
-</script>
-
-</body>
-</html>
---}}
-
     <!DOCTYPE html>
 <html>
 <head>
@@ -90,11 +51,11 @@
 
     <h3>Send Message</h3>
 
-    <input type="text" id="message" placeholder="Message">
+    <input type="text" id="message" name="message" placeholder="Message">
 
-    <input type="file" id="image" accept=".jpg,.jpeg,.png">
+    <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png">
 
-    <textarea id="description" placeholder="Description"></textarea>
+    <textarea id="description" name="description" placeholder="Description"></textarea>
 
     <button id="sendBtn">Send</button>
 
@@ -130,7 +91,40 @@
 
     });
 
-    document.getElementById("sendBtn").onclick=function(){
+    var payload = {};
+
+    connection.on("initActivity", function(data){
+        payload = data || {};
+
+        payload.arguments = payload.arguments || {};
+        payload.arguments.execute = payload.arguments.execute || {};
+        payload.arguments.execute.inArguments = payload.arguments.execute.inArguments || [];
+
+        console.log(payload)
+    });
+
+    document.getElementById("sendBtn").onclick = function(){
+
+        let existingArgs = payload.arguments.execute.inArguments || [];
+
+        existingArgs.push({
+            message: document.getElementById("message").value,
+            description: document.getElementById("description").value,
+            image: imageUrl
+        });
+
+        payload.arguments.execute.inArguments = existingArgs;
+
+
+        payload.metaData.isConfigured = true;
+
+        connection.trigger("updateActivity", payload);
+
+        console.log("payload1")
+        console.log(payload)
+    };
+    /*document.getElementById("sendBtn").onclick=function(){
+        console.log("test1")
 
         let message = document.getElementById("message").value;
 
@@ -156,7 +150,14 @@
 
         });
 
-    };
+        console.log("message")
+        console.log(message)
+        console.log("description")
+        console.log(description)
+        console.log("imageUrl")
+        console.log(imageUrl)
+
+    };*/
 
 </script>
 

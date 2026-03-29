@@ -15,7 +15,10 @@
         "execute": {
             "inArguments": [
                 {
-                    "emailAddress": "{{InteractionDefaults.Email}}"
+                    "emailAddress": "{{Event.EmailAddress}}",
+                    "message": "",
+                    "description": "",
+                    "image": ""
                 }
             ],
             "outArguments": [
@@ -59,6 +62,27 @@
                             "isNullable": false,
                             "direction": "in"
                         }
+                    },
+                    {
+                        "message": {
+                            "dataType": "Text",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
+                    },
+                    {
+                        "description": {
+                            "dataType": "Text",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
+                    },
+                    {
+                        "image": {
+                            "dataType": "Text",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
                     }
                 ],
                 "outArguments": [
@@ -69,7 +93,10 @@
                             "access": "visible"
                         }
                     }
-                ]
+                ],
+                "timeout": 10000,
+                "retryCount": 1,
+                "retryDelay": 1000
             }
         }
     }
