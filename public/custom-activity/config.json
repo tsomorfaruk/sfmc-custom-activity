@@ -16,9 +16,9 @@
             "inArguments": [
                 {
                     "emailAddress": "{{Event.EmailAddress}}",
-                    "message": "",
-                    "description": "",
-                    "image": ""
+                    "message": "{{message}}",
+                    "description": "{{description}}",
+                    "image": "{{image}}"
                 }
             ],
             "outArguments": [
@@ -61,23 +61,17 @@
                             "dataType": "Email",
                             "isNullable": false,
                             "direction": "in"
-                        }
-                    },
-                    {
+                        },
                         "message": {
                             "dataType": "Text",
                             "isNullable": true,
                             "direction": "in"
-                        }
-                    },
-                    {
+                        },
                         "description": {
                             "dataType": "Text",
                             "isNullable": true,
                             "direction": "in"
-                        }
-                    },
-                    {
+                        },
                         "image": {
                             "dataType": "Text",
                             "isNullable": true,

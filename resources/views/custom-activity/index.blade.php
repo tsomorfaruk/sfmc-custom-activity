@@ -57,6 +57,7 @@
 
     <textarea id="description" name="description" placeholder="Description"></textarea>
 
+
     <button id="sendBtn">Send</button>
 
 </div>
@@ -67,7 +68,7 @@
 
     connection.trigger("ready");
 
-    let imageUrl = null;
+    let image = null;
 
     document.getElementById("image").addEventListener("change", async function(){
 
@@ -87,77 +88,35 @@
 
         let data = await response.json();
 
-        imageUrl = data.url;
+        image = data.url;
 
     });
 
     var payload = {};
 
     connection.on("initActivity", function(data){
-        payload = data || {};
-
-        payload.arguments = payload.arguments || {};
-        payload.arguments.execute = payload.arguments.execute || {};
-        payload.arguments.execute.inArguments = payload.arguments.execute.inArguments || [];
-
+        console.log("data")
+        console.log(data)
+        payload = data;
+        console.log("before payload")
         console.log(payload)
     });
 
     document.getElementById("sendBtn").onclick = function(){
 
-        let existingArgs = payload.arguments.execute.inArguments || [];
+        payload.arguments.execute.inArguments[0].message = document.getElementById("message").value;
 
-        existingArgs.push({
-            message: document.getElementById("message").value,
-            description: document.getElementById("description").value,
-            image: imageUrl
-        });
+        payload.arguments.execute.inArguments[0].description = document.getElementById("description").value;
 
-        payload.arguments.execute.inArguments = existingArgs;
-
+        payload.arguments.execute.inArguments[0].image = image;
 
         payload.metaData.isConfigured = true;
 
+        console.log("FINAL PAYLOAD", JSON.stringify(payload));
+
         connection.trigger("updateActivity", payload);
 
-        console.log("payload1")
-        console.log(payload)
     };
-    /*document.getElementById("sendBtn").onclick=function(){
-        console.log("test1")
-
-        let message = document.getElementById("message").value;
-
-        let description = document.getElementById("description").value;
-
-        connection.trigger("updateActivity",{
-
-            arguments:{
-                execute:{
-                    inArguments:[
-                        {
-                            message:message,
-                            description:description,
-                            image:imageUrl
-                        }
-                    ]
-                }
-            },
-
-            metaData:{
-                isConfigured:true
-            }
-
-        });
-
-        console.log("message")
-        console.log(message)
-        console.log("description")
-        console.log(description)
-        console.log("imageUrl")
-        console.log(imageUrl)
-
-    };*/
 
 </script>
 
