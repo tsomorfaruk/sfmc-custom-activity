@@ -16,9 +16,9 @@
             "inArguments": [
                 {
                     "emailAddress": "{{Event.EmailAddress}}",
-                    "message": "",
-                    "description": "",
-                    "image": ""
+                    "message": "{{message}}",
+                    "description": "{{description}}",
+                    "image": "{{image}}"
                 }
             ],
             "outArguments": [
