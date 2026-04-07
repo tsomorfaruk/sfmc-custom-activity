@@ -57,6 +57,7 @@
 
     <textarea id="description" name="description" placeholder="Description"></textarea>
 
+
     <button id="sendBtn">Send</button>
 
 </div>
@@ -94,18 +95,28 @@
     var payload = {};
 
     connection.on("initActivity", function(data){
-        payload = data || {};
-
-        payload.arguments = payload.arguments || {};
-        payload.arguments.execute = payload.arguments.execute || {};
-        payload.arguments.execute.inArguments = payload.arguments.execute.inArguments || [];
-
+        console.log("data")
+        console.log(data)
+        payload = data;
+        console.log("before payload")
         console.log(payload)
     });
 
     document.getElementById("sendBtn").onclick = function(){
 
-        let existingArgs = payload.arguments.execute.inArguments || [];
+        payload.arguments.execute.inArguments[0].message = document.getElementById("message").value;
+
+        payload.arguments.execute.inArguments[0].description = document.getElementById("description").value;
+
+        payload.arguments.execute.inArguments[0].image = imageUrl;
+
+        payload.metaData.isConfigured = true;
+
+        console.log("FINAL PAYLOAD", JSON.stringify(payload));
+
+        connection.trigger("updateActivity", payload);
+
+        /*let existingArgs = payload.arguments.execute.inArguments;
 
         existingArgs.push({
             message: document.getElementById("message").value,
@@ -118,10 +129,12 @@
 
         payload.metaData.isConfigured = true;
 
+        console.log("FINAL PAYLOAD", JSON.stringify(payload));
+
         connection.trigger("updateActivity", payload);
 
         console.log("payload1")
-        console.log(payload)
+        console.log(payload)*/
     };
     /*document.getElementById("sendBtn").onclick=function(){
         console.log("test1")
