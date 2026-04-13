@@ -1,0 +1,110 @@
+{
+    "workflowApiVersion": "1.1",
+    "type": "REST",
+    "metaData": {
+        "icon": "/images/icon.png",
+        "category": "message"
+    },
+    "lang": {
+        "en-US": {
+            "name": "Web Notification",
+            "description": "Send data to Web API"
+        }
+    },
+    "arguments": {
+        "execute": {
+            "inArguments": [
+                {
+                    "emailAddress": "{{Event.EmailAddress}}"
+                },
+                {
+                    "message": "Test"
+                },
+                {
+                    "description": "Test Description"
+                },
+                {
+                    "image": "https://sfmc-custom-activity.croncoders.com/storage/activity_images/1776067961_Salient logo färg 2023-04.pn"
+                }
+            ],
+            "outArguments": [
+                {
+                    "status": ""
+                }
+            ],
+
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/execute",
+            "verb": "POST"
+        }
+    },
+    "configurationArguments": {
+        "save": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/save"
+        },
+        "publish": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/publish"
+        },
+        "validate": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/validate"
+        },
+        "stop": {
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/stop"
+        }
+
+    },
+    "userInterfaces": {
+        "configModal": {
+            "height": 450,
+            "width": 800,
+            "fullscreen": false
+        }
+    },
+    "schema": {
+        "arguments": {
+            "execute": {
+                "inArguments": [
+                    {
+                        "emailAddress": {
+                            "dataType": "Text",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
+                    },
+                    {
+                        "message": {
+                            "dataType": "Text",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
+                    },
+                    {
+                        "description": {
+                            "dataType": "Text",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
+                    },
+                    {
+                        "image": {
+                            "dataType": "Text",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
+                    }
+                ],
+                "outArguments": [
+                    {
+                        "status": {
+                            "dataType": "Text",
+                            "direction": "out",
+                            "access": "visible"
+                        }
+                    }
+                ],
+                "timeout": 10000,
+                "retryCount": 1,
+                "retryDelay": 1000
+            }
+        }
+    }
+}
