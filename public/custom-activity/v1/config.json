@@ -33,22 +33,22 @@
                 }
             ],
 
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/execute",
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/execute",
             "verb": "POST"
         }
     },
     "configurationArguments": {
         "save": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/save"
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/save"
         },
         "publish": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/publish"
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/publish"
         },
         "validate": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/validate"
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/validate"
         },
         "stop": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v2/stop"
+            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/stop"
         }
 
     },

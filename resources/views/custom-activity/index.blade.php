@@ -104,13 +104,13 @@
 
     document.getElementById("sendBtn").onclick = function(){
 
-        payload.arguments.execute.inArguments[0].message = document.getElementById("message").value;
+        /*payload.arguments.execute.inArguments[0].message = document.getElementById("message").value;
 
         payload.arguments.execute.inArguments[0].description = document.getElementById("description").value;
 
         payload.arguments.execute.inArguments[0].image = image;
 
-        payload.metaData.isConfigured = true;
+        payload.metaData.isConfigured = true;*/
 
         console.log("FINAL PAYLOAD", JSON.stringify(payload));
 
