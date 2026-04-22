@@ -18,7 +18,7 @@
                     "emailAddress": "{{Event.EmailAddress}}"
                 },
                 {
-                    "message": "Test"
+                    "message": "{{message}}"
                 },
                 {
                     "description": "Test Description"
