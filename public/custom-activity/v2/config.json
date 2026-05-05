@@ -18,7 +18,7 @@
                     "emailAddress": "{{Event.EmailAddress}}"
                 },
                 {
-                    "message": "{{message}}"
+                    "message": "sdfsdf"
                 },
                 {
                     "description": "Test Description"
@@ -33,22 +33,26 @@
                 }
             ],
 
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/execute",
-            "verb": "POST"
+            "url": "https://sfmc-custom-activity.croncoders.com/api/custom-activity/execute",
+            "verb": "POST",
+            "timeout": 10000,
+            "retryCount": 3,
+            "retryDelay": 1000,
+            "concurrentRequests": 5
         }
     },
     "configurationArguments": {
         "save": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/save"
+            "url": "https://sfmc-custom-activity.croncoders.com/api/custom-activity/save"
         },
         "publish": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/publish"
+            "url": "https://sfmc-custom-activity.croncoders.com/api/custom-activity/publish"
         },
         "validate": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/validate"
+            "url": "https://sfmc-custom-activity.croncoders.com/api/custom-activity/validate"
         },
         "stop": {
-            "url": "https://sfmc-custom-activity.croncoders.com/custom-activity/v1/stop"
+            "url": "https://sfmc-custom-activity.croncoders.com/api/custom-activity/stop"
         }
 
     },
@@ -100,10 +104,7 @@
                             "access": "visible"
                         }
                     }
-                ],
-                "timeout": 10000,
-                "retryCount": 1,
-                "retryDelay": 1000
+                ]
             }
         }
     }

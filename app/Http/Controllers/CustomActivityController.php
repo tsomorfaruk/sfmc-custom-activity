@@ -66,21 +66,8 @@ class CustomActivityController extends Controller
     {
         \Log::info('Journey Data', $request->all());
 
-        /*return response()->json([
-            "status" => "success"
-        ]);*/
-
-    {
-        //$data = $request->all();
-
         return response()->json([
-            "status" => "ok",
-            "outArguments" => [
-                [
-                    "status" => "success"
-                ]
-            ]
+            "status" => "success"
         ]);
-    }
     }
 }
